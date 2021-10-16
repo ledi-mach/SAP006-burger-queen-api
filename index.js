@@ -11,9 +11,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', routes);
 
-app.get('*', (req, res) => {
+/* app.get('*', (req, res) => {
   res.send('hello test!');
-});
+}); */
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
