@@ -1,6 +1,17 @@
-const getAllUsers = (req, res) => {
-  res.send('Request getAllUsers feita');
-};
+const db = require('../db/models');
+
+ const getAllUsers = async (req, res) => {
+  const getUsers = await db.Users.findAll();
+  try {
+    return res.status(200).json(getUsers);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+}; 
+
+// const getAllUsers = (req, res) => {
+   //res.send('Request getAllUsersFeita');
+//};
 
 const getUserById = (req, res) => {
   res.send('Request getUserById feita');

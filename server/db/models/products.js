@@ -5,12 +5,12 @@ module.exports = (sequelize, DataTypes) => {
   class Products extends Model {
 
   static associate(models) {
-      Products.belongsToMany(models.ProductsOrders,
+      /* Products.belongsToMany(models.Orders,
         {
           through: 'ProductsOrders',
           as: 'orders',
           foreignKey: 'products_id',
-        });
+        }); */
     }
   };
   Products.init({
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     complement: DataTypes.STRING,
     image: DataTypes.STRING,
     type: DataTypes.STRING,
-    sub_type: DataTypes.STRING
+    sub_type: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Products',
