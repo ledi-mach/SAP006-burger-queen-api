@@ -39,25 +39,37 @@ const putUser = async (req, res) => {
     return res.status(400).json(error);
   }
 };
-const postUser = (req, res) => {
-  res.send('PostUser feita');
-};
 
-/* const postUser = async (req, res) => {
-  const { id } = req.params;
-  const updateUser = req.body;
+const postUser = async (req, res) => {
+  const {
+    name, email, password, role, restaurant,
+  } = req.body;
+
   try {
-    await db.Users.update(updateUser, { where: { id: Number(id) } });
-    const userUpdated = await db.Users.findOne({
-      where: { id: Number(id) },
-      attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+    const findOrCreateNewUser = await db.Users.findOrCreate({
+      where: { email },
+      defaults: {
+        name, email, password, role, restaurant,
+      },
     });
-    return res.status(200).json(userUpdated);
+
+    const newUser = findOrCreateNewUser[0];
+    const newEmail = findOrCreateNewUser[1];
+
+    if (!newEmail) {
+      return res.status(403).json({ message: 'Email already registered' });
+    }
+
+    const returnedUser = await db.Users.findOne({
+      where: { id: newUser.id },
+      attributes: { exclude: ['password, createdAt, updateAt'] },
+    });
+
+    return res.status(201).json(returnedUser);
   } catch (error) {
     return res.status(400).json(error);
   }
 };
-*/
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;

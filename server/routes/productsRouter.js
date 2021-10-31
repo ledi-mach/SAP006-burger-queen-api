@@ -5,9 +5,9 @@ const {
 
 const router = Router();
 router.get('/', getAllProducts);
-router.get('/:productid', getProductById);
+router.get('/:id', getProductById);
 router.post('/', postProducts);
-router.put('/:productid', putProducts);
-router.delete('/:productid', deleteProducts);
+router.put('/:id', putProducts);
+router.delete('/:id', deleteProducts);
 
 module.exports = router;

@@ -1,11 +1,32 @@
-const getAllProducts = (req, res) => {
-  console.log('pegando todos os produtos');
-  res.send('Request getAllProducts feita');
+const db = require('../db/models');
+
+const getAllProducts = async (req, res) => {
+  const getProducts = await db.Products.findAll();
+
+  try {
+    if (getProducts.length === 0) {
+      res.status(404).json({ message: 'No products found.' });
+    }
+    return res.status(200).json(getProducts);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 };
 
-const getProductById = (req, res) => {
-  console.log('pegando os produtos por id');
-  res.send('Request getProductsById feita');
+const getProductById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const getOneProduct = await db.Products.findOne({
+      where: { id: Number(id) },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
+    if (!getOneProduct) {
+      return res.status(200).json({ message: 'Product not found.' });
+    }
+    return res.status(200).json(getOneProduct);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 };
 
 const postProducts = (req, res) => {
