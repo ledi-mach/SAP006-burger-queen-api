@@ -25,21 +25,6 @@ const getUserById = async (req, res) => {
   }
 };
 
-const putUser = async (req, res) => {
-  const { id } = req.params;
-  const updateUser = req.body;
-  try {
-    await db.Users.update(updateUser, { where: { id: Number(id) } });
-    const userUpdated = await db.Users.findOne({
-      where: { id: Number(id) },
-      attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
-    });
-    return res.status(200).json(userUpdated);
-  } catch (error) {
-    return res.status(400).json(error);
-  }
-};
-
 const postUser = async (req, res) => {
   const {
     name, email, password, role, restaurant,
@@ -66,6 +51,21 @@ const postUser = async (req, res) => {
     });
 
     return res.status(201).json(returnedUser);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+const putUser = async (req, res) => {
+  const { id } = req.params;
+  const updateUser = req.body;
+  try {
+    await db.Users.update(updateUser, { where: { id: Number(id) } });
+    const userUpdated = await db.Users.findOne({
+      where: { id: Number(id) },
+      attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+    });
+    return res.status(200).json(userUpdated);
   } catch (error) {
     return res.status(400).json(error);
   }
