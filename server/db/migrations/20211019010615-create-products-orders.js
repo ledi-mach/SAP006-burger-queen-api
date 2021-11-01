@@ -6,30 +6,30 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       order_id: {
         type: Sequelize.INTEGER,
-        references: {model:"Orders", key:"id"}
+        references: { model: 'Orders', key: 'id' },
       },
       product_id: {
         type: Sequelize.INTEGER,
-        references: {model:"Products", key:"id"}
+        references: { model: 'Products', key: 'id' },
       },
       qtd: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('ProductsOrders');
-  }
+  },
 };
