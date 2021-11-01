@@ -17,10 +17,7 @@ const getAllOrders = async (req, res) => {
   });
   try {
     if (getOrders.length === 0) {
-      return res.status(200).json({
-        code: 200,
-        message: 'No orders at the moment.',
-      });
+      return res.status(200).json({ message: 'No orders at the moment.' });
     }
     return res.status(200).json(getOrders);
   } catch (error) {
@@ -47,10 +44,7 @@ const getOrderById = async (req, res) => {
 
   try {
     if (!getOrder) {
-      return res.status(200).json({
-        code: 200,
-        message: 'Order not found.',
-      });
+      return res.status(200).json({ message: 'Order not found.' });
     }
     return res.status(200).json(getOrder);
   } catch (error) {
@@ -58,17 +52,9 @@ const getOrderById = async (req, res) => {
   }
 };
 
-/* const getAllOrders = (req, res) => {
-  res.send('Request getAllOlders feita');
-};
-
-const getOrderById = (req, res) => {
-  res.send('Request getOrdersById feita');
-}; */
-
-const postOrder = (req, res) => {
+/* const postOrder = (req, res) => {
   res.send('Request postOrder feita');
-};
+}; */
 
 const putOrder = (req, res) => {
   res.send('Request putOrder feita');
@@ -79,5 +65,5 @@ const deleteOrder = (req, res) => {
 };
 
 module.exports = {
-  getAllOrders, getOrderById, postOrder, putOrder, deleteOrder,
+  getAllOrders, getOrderById, /* postOrder, */ putOrder, deleteOrder,
 };
