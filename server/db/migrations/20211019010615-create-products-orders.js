@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('ProductsOrders', {
@@ -9,14 +8,19 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       order_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'Orders', key: 'id' },
+        unique: false,
       },
       product_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'Products', key: 'id' },
+        unique: false,
       },
       qtd: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       createdAt: {

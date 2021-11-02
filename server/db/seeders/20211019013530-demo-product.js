@@ -1,8 +1,6 @@
-'use strict';
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Products', [
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert('Products', [
       {
         name: 'Hambúrguer simples',
         price: 11,
@@ -12,8 +10,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
-
+        updatedAt: new Date(),
       },
       {
         name: 'Hambúrguer simples',
@@ -24,7 +21,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -36,7 +33,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -48,7 +45,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -60,7 +57,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -72,7 +69,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -84,7 +81,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -96,7 +93,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -108,7 +105,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -120,7 +117,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         name: 'Hambúrguer duplo',
@@ -131,7 +128,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -143,7 +140,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -155,7 +152,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -167,7 +164,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'hamburguer',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -179,7 +176,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'side',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
 
       },
       {
@@ -191,8 +188,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'side',
         createdAt: new Date(),
-        updatedAt: new Date()
-
+        updatedAt: new Date(),
       },
       {
         name: 'Água 500mL',
@@ -203,7 +199,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'drinks',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         name: 'Água 750mL',
@@ -214,8 +210,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'drinks',
         createdAt: new Date(),
-        updatedAt: new Date()
-
+        updatedAt: new Date(),
       },
       {
         name: 'Refrigerante 500mL',
@@ -226,8 +221,7 @@ module.exports = {
         type: 'all-day',
         sub_type: 'drinks',
         createdAt: new Date(),
-        updatedAt: new Date()
-
+        updatedAt: new Date(),
       },
       {
         name: 'Refrigerante 750mL',
@@ -238,12 +232,11 @@ module.exports = {
         type: 'all-day',
         sub_type: 'drinks',
         createdAt: new Date(),
-        updatedAt: new Date()
-
-      }  
+        updatedAt: new Date(),
+      },
     ]);
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {});
-  }
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('Users', null, {});
+  },
 };
