@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const db = require('../db/models');
 
 const { Products, ProductsOrders } = db;
@@ -52,18 +53,64 @@ const getOrderById = async (req, res) => {
   }
 };
 
-/* const postOrder = (req, res) => {
-  res.send('Request postOrder feita');
-}; */
+const postOrder = async (req, res) => {
+  const requestProducts = req.body.Products;
+  const {
+    client_name, table, status, user_id, processedAt,
+  } = req.body;
 
-const putOrder = (req, res) => {
-  res.send('Request putOrder feita');
+  try {
+    const creatingNewOrder = await db.Orders.create({
+      client_name, user_id, table, status, processedAt,
+    })
+      .then((result) => {
+        requestProducts.map((item) => {
+          const findProduct = Products.findByPk(item.id);
+          if (!findProduct) {
+            return res.status(400).json({ message: 'Product not found.' });
+          }
+
+          const ordersItems = {
+            order_id: result.id,
+            product_id: item.id,
+            qtd: item.qtd,
+          };
+
+          db.ProductsOrders.create(ordersItems);
+          return res.status(200).json(result);
+        });
+      });
+
+    return res.status(200).json(creatingNewOrder);
+  } catch (error) {
+    return res.status(404).json(error.message);
+  }
 };
 
-const deleteOrder = (req, res) => {
-  res.send('Request deleteOrder feita');
+const putOrder = async (req, res) => {
+  const { id } = req.params;
+  const updateOrder = req.body;
+  try {
+    await db.Orders.update(updateOrder, { where: { id: Number(id) } });
+    const orderUpdated = await db.Orders.findOne({
+      where: { id: Number(id) },
+    });
+    return res.status(200).json(orderUpdated);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
+
+const deleteOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await db.Orders.destroy({ where: { id: Number(id) } });
+    return res.status(200).json({ message: 'Order deleted' });
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
 };
 
 module.exports = {
-  getAllOrders, getOrderById, /* postOrder, */ putOrder, deleteOrder,
+  getAllOrders, getOrderById, postOrder, putOrder, deleteOrder,
 };
